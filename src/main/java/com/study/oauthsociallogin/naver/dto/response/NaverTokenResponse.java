@@ -1,9 +1,15 @@
-package com.study.oauthsociallogin.naver.dto.response;
+package com.study.oauthsociallogin.naver.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 @Getter
 @NoArgsConstructor
@@ -28,4 +34,24 @@ public class NaverTokenResponse {
     // 오류에 대한 상세 설명
     @JsonProperty("error_description")
     private String errorDescription;
+
+    // RestTemplate 필드 추가
+    private final RestTemplate restTemplate = new RestTemplate();
+
+    // 사용자 정보 요청 메서드
+    public NaverUserResponse.NaverUserDetail toRequestProfile(String accessToken) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(accessToken);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(headers);
+
+        ResponseEntity<NaverUserResponse> response =
+                restTemplate.exchange(
+                        "https://openapi.naver.com/v1/nid/me",
+                        HttpMethod.GET,
+                        request,
+                        NaverUserResponse.class
+                );
+
+        return response.getBody().getNaverUserDetail();
+    }
 }
