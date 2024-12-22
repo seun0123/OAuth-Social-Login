@@ -1,4 +1,4 @@
-package com.study.oauthsociallogin.naver.config;
+package com.study.oauthsociallogin.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

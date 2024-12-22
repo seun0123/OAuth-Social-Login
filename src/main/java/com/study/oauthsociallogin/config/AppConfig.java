@@ -1,4 +1,4 @@
-package com.study.oauthsociallogin.naver.config;
+package com.study.oauthsociallogin.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
