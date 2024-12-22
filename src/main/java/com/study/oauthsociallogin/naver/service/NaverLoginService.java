@@ -1,6 +1,6 @@
 package com.study.oauthsociallogin.naver.service;
 
-import com.study.oauthsociallogin.naver.config.NaverProperties;
+import com.study.oauthsociallogin.config.NaverProperties;
 import com.study.oauthsociallogin.naver.domain.Platform;
 import com.study.oauthsociallogin.naver.domain.Users;
 import com.study.oauthsociallogin.naver.dto.response.NaverTokenResponse;
