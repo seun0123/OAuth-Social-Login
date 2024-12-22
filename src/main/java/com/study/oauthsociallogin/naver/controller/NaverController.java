@@ -1,4 +1,4 @@
-package com.study.oauthsociallogin.controller;
+package com.study.oauthsociallogin.naver.controller;
 
 import com.study.oauthsociallogin.common.response.CustomResponseEntity;
 import com.study.oauthsociallogin.naver.dto.response.UserResponse;
