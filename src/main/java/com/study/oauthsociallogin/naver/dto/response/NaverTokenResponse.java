@@ -1,4 +1,4 @@
-package com.study.oauthsociallogin.naver.dto;
+package com.study.oauthsociallogin.naver.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
