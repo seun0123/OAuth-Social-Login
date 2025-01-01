@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.4.0'
+    id 'org.springframework.boot' version '3.3.5'
     id 'io.spring.dependency-management' version '1.1.6'
 }
 
@@ -13,34 +13,54 @@ java {
     }
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
 repositories {
     mavenCentral()
 }
 
+springBoot {
+    mainClass = 'com.study.oauthsociallogin.OAuthSocialLoginApplication'
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'com.google.code.gson:gson:2.10.1' // Gson 버전을 강제로 지정
+    }
+}
+
 dependencies {
+    // Spring Boot 스타터
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // Thymeleaf Security Extras
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+
+    // Lombok
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
+
+    // MySQL JDBC
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // JWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
+    runtimeOnly 'com.google.code.gson:gson:2.10.1'
+
+    // Spring Boot DevTools
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // 테스트
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
-    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
-    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
-    implementation 'com.google.code.gson:gson:2.10.1'
 }
 
 tasks.named('test') {
