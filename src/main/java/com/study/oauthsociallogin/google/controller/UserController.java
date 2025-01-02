@@ -1,7 +1,7 @@
 package com.study.oauthsociallogin.google.controller;
 
 import com.study.oauthsociallogin.common.domain.Users;
-import com.study.oauthsociallogin.google.service.GoogleLoginService;
+import com.study.oauthsociallogin.google.service.GoogleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +14,10 @@ import java.security.Principal;
 @RequestMapping("/api")
 public class UserController {
 
-    private final GoogleLoginService googleLoginService;
+    private final GoogleService googleService;
 
     @GetMapping("/principalUser")
     public Users getUser(Principal principal) {
-        return googleLoginService.test(principal);
+        return googleService.test(principal);
     }
 }

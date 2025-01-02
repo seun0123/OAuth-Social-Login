@@ -5,7 +5,7 @@ import com.study.oauthsociallogin.common.repository.UsersRepository;
 import com.study.oauthsociallogin.config.TokenProvider;
 import com.study.oauthsociallogin.common.domain.Users;
 import com.study.oauthsociallogin.google.dto.response.TokenDto;
-import com.study.oauthsociallogin.google.dto.response.UserInfo;
+import com.study.oauthsociallogin.google.dto.response.UserInfoDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class GoogleLoginService {
+public class GoogleService {
 
     @Value("${google.client-id}")
     private String GOOGLE_CLIENT_ID;
@@ -61,14 +61,14 @@ public class GoogleLoginService {
     }
 
     public TokenDto loginOrSignUp(String googleAccessToken) {
-        UserInfo userInfo = getUserInfo(googleAccessToken);
+        UserInfoDto userInfoDto = getUserInfo(googleAccessToken);
 
-        Users user = usersRepository.findByEmail(userInfo.getEmail())
+        Users user = usersRepository.findByEmail(userInfoDto.getEmail())
                 .orElseGet(() -> usersRepository.save(Users.builder()
-                        .platformId(userInfo.getEmail())
-                        .email(userInfo.getEmail())
-                        .name(userInfo.getName())
-                        .profileUrl(userInfo.getPictureUrl())
+                        .platformId(userInfoDto.getEmail())
+                        .email(userInfoDto.getEmail())
+                        .name(userInfoDto.getName())
+                        .profileUrl(userInfoDto.getPictureUrl())
                         .role(Users.Role.USER)
                         .platform(Users.Platform.GOOGLE)
                         .build())
@@ -79,7 +79,7 @@ public class GoogleLoginService {
                 .build();
     }
 
-    private UserInfo getUserInfo(String accessToken) {
+    private UserInfoDto getUserInfo(String accessToken) {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + accessToken;
 
@@ -93,7 +93,7 @@ public class GoogleLoginService {
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             String json = responseEntity.getBody();
             Gson gson = new Gson();
-            return gson.fromJson(json, UserInfo.class);
+            return gson.fromJson(json, UserInfoDto.class);
         }
 
         throw new RuntimeException("유저 정보를 가져오는데 실패했습니다.");
