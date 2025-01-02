@@ -1,5 +1,8 @@
 package com.study.oauthsociallogin.common.domain;
 
+import lombok.Getter;
+
+@Getter
 public enum Role {
     USER("ROLE_USER"),
     ADMIN("ROLE_ADMIN");

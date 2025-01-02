@@ -26,6 +26,8 @@ naver:
 google:
   client-id: ${GOOGLE_CLIENT_ID}
   client-secret: ${GOOGLE_CLIENT_SECRET}
+  token-uri : ${GOOGLE_TOKEN_URI}
+  redirect-uri : ${GOOGLE_REDIRECT_URI}
 
 kakao:
   client_id: ${KAKAO_CLIENT_ID}

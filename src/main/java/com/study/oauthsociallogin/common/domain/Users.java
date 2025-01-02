@@ -1,6 +1,5 @@
 package com.study.oauthsociallogin.common.domain;
 
-import com.study.oauthsociallogin.naver.domain.Platform;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,32 +15,39 @@ public class Users {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    private String platformId;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String profileUrl;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Role role;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Platform platform;
 
-    @Column(unique = true)
-    private Long platformId; // 플랫폼별 고유 ID (ex: Kakao ID, Naver ID 등)
-
     @Builder
-    public Users(Long id, String email, String name, String profileUrl, Role role, Platform platform, Long platformId) {
+    public Users(Long id, String platformId, String email, String name, String profileUrl, Role role, Platform platform) {
         this.id = id;
+        this.platformId = platformId;
         this.email = email;
         this.name = name;
         this.profileUrl = profileUrl;
         this.role = role;
         this.platform = platform;
-        this.platformId = platformId;
+    }
+
+    public enum Role {
+        USER, ADMIN
+    }
+
+    public enum Platform {
+        GOOGLE, KAKAO, NAVER, GITHUB
     }
 }

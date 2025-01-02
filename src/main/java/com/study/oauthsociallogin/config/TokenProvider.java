@@ -1,6 +1,6 @@
 package com.study.oauthsociallogin.config;
 
-import com.study.oauthsociallogin.google.domain.Users;
+import com.study.oauthsociallogin.common.domain.Users;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

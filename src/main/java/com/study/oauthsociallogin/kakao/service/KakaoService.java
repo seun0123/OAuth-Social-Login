@@ -6,7 +6,7 @@ import com.study.oauthsociallogin.common.domain.Users;
 import com.study.oauthsociallogin.config.TokenProvider;
 import com.study.oauthsociallogin.kakao.dto.response.KakaoAccessTokenDto;
 import com.study.oauthsociallogin.kakao.dto.response.KakaoTokenDto;
-import com.study.oauthsociallogin.kakao.repository.UsersRepository;
+import com.study.oauthsociallogin.common.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,8 +47,8 @@ public class KakaoService {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> responseEntity = restTemplate.exchange(reqURL, HttpMethod.POST, requestEntity, String.class);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
+            ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(responseEntity.getBody());
             return KakaoTokenDto.builder()
                     .accessToken(jsonNode.get("access_token").asText())
@@ -66,7 +66,6 @@ public class KakaoService {
         String reqURL = "https://kapi.kakao.com/v2/user/me";
 
         try {
-            // 사용자 정보 요청
             HttpHeaders headers = new HttpHeaders();
             headers.set("Authorization", "Bearer " + tokenDto.getAccessToken());
             HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
@@ -78,21 +77,21 @@ public class KakaoService {
             JsonNode jsonNode = objectMapper.readTree(responseEntity.getBody());
 
             Long kakaoId = jsonNode.get("id").asLong();
-            String username = jsonNode.path("properties").path("nickname").asText();
-            String profilePhotoUrl = jsonNode.path("properties").path("profile_image").asText();
+            String email = jsonNode.path("kakao_account").path("email").asText();
+            String name = jsonNode.path("properties").path("nickname").asText();
+            String profileUrl = jsonNode.path("properties").path("profile_image").asText();
 
-            // 사용자 저장 또는 조회
-            Users user = usersRepository.findByKakaoId(kakaoId)
-                    .orElseGet(() -> {
-                        Users newUser = Users.builder()
-                                .username(username)
-                                .kakaoId(kakaoId)
-                                .profilePhotoUrl(profilePhotoUrl)
-                                .build();
-                        return usersRepository.save(newUser);
-                    });
+            Users user = usersRepository.findByPlatformId(kakaoId.toString())
+                    .orElseGet(() -> usersRepository.save(Users.builder()
+                            .platformId(kakaoId.toString())
+                            .email(email)
+                            .name(name)
+                            .profileUrl(profileUrl)
+                            .role(Users.Role.USER)
+                            .platform(Users.Platform.KAKAO)
+                            .build())
+                    );
 
-            // 액세스 토큰 생성
             String accessToken = tokenProvider.createAccessToken(user);
 
             return KakaoAccessTokenDto.builder()
