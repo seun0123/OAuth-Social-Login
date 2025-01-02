@@ -43,7 +43,7 @@ public class TokenProvider {
 
         return Jwts.builder()
                 .setSubject(user.getId().toString())
-                .claim(ROLE_CLAIM, user.getRole().name())
+                .claim(ROLE_CLAIM, "USER")
                 .setExpiration(accessTokenExpiredTime)
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
