@@ -1,8 +1,8 @@
 package com.study.oauthsociallogin.naver.service;
 
 import com.study.oauthsociallogin.config.NaverProperties;
-import com.study.oauthsociallogin.naver.domain.Platform;
-import com.study.oauthsociallogin.naver.domain.Users;
+import com.study.oauthsociallogin.common.domain.Platform;
+import com.study.oauthsociallogin.common.domain.Users;
 import com.study.oauthsociallogin.naver.dto.response.NaverTokenResponse;
 import com.study.oauthsociallogin.naver.dto.response.NaverUserResponse;
 import lombok.RequiredArgsConstructor;

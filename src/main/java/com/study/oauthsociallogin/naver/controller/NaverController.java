@@ -2,7 +2,7 @@ package com.study.oauthsociallogin.naver.controller;
 
 import com.study.oauthsociallogin.common.response.CustomResponseEntity;
 import com.study.oauthsociallogin.naver.dto.response.UserResponse;
-import com.study.oauthsociallogin.naver.domain.Platform;
+import com.study.oauthsociallogin.common.domain.Platform;
 import com.study.oauthsociallogin.naver.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

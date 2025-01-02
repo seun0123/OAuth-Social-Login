@@ -1,7 +1,7 @@
 package com.study.oauthsociallogin.naver.service;
 
-import com.study.oauthsociallogin.naver.domain.Platform;
-import com.study.oauthsociallogin.naver.domain.Users;
+import com.study.oauthsociallogin.common.domain.Platform;
+import com.study.oauthsociallogin.common.domain.Users;
 
 public interface OAuth2LoginService {
     Platform supports(); // 지원하는 플랫폼을 반환

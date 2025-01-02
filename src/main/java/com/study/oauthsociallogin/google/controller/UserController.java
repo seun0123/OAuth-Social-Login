@@ -1,6 +1,6 @@
 package com.study.oauthsociallogin.google.controller;
 
-import com.study.oauthsociallogin.google.domain.Users;
+import com.study.oauthsociallogin.common.domain.Users;
 import com.study.oauthsociallogin.google.service.GoogleLoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

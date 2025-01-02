@@ -2,7 +2,7 @@ package com.study.oauthsociallogin.google.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.study.oauthsociallogin.google.domain.Users;
+import com.study.oauthsociallogin.common.domain.Users;
 import java.util.Optional;
 
 @Repository

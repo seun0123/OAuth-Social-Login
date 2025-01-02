@@ -1,6 +1,6 @@
 package com.study.oauthsociallogin.naver.dto.response;
 
-import com.study.oauthsociallogin.naver.domain.Users;
+import com.study.oauthsociallogin.common.domain.Users;
 import lombok.Builder;
 import lombok.Getter;
 

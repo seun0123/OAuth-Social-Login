@@ -2,8 +2,8 @@ package com.study.oauthsociallogin.kakao.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.study.oauthsociallogin.common.domain.Users;
 import com.study.oauthsociallogin.config.TokenProvider;
-import com.study.oauthsociallogin.kakao.domain.Users;
 import com.study.oauthsociallogin.kakao.dto.response.KakaoAccessTokenDto;
 import com.study.oauthsociallogin.kakao.dto.response.KakaoTokenDto;
 import com.study.oauthsociallogin.kakao.repository.UsersRepository;

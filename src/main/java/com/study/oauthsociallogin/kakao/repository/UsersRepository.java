@@ -1,6 +1,6 @@
 package com.study.oauthsociallogin.kakao.repository;
 
-import com.study.oauthsociallogin.kakao.domain.Users;
+import com.study.oauthsociallogin.common.domain.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

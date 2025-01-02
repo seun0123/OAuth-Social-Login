@@ -2,8 +2,8 @@ package com.study.oauthsociallogin.google.service;
 
 import com.google.gson.Gson;
 import com.study.oauthsociallogin.config.TokenProvider;
-import com.study.oauthsociallogin.google.domain.Role;
-import com.study.oauthsociallogin.google.domain.Users;
+import com.study.oauthsociallogin.common.domain.Role;
+import com.study.oauthsociallogin.common.domain.Users;
 import com.study.oauthsociallogin.google.dto.response.TokenDto;
 import com.study.oauthsociallogin.google.dto.response.UserInfo;
 import com.study.oauthsociallogin.google.repository.UserRepository;
